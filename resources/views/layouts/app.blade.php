@@ -28,9 +28,12 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link" href="{{ route('threads.index') }}">All Threads</a></li>
+
+                        <li><a class="nav-link" href="{{ route('threads.create') }}">New Thread</a></li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Select Channel
+                                Channels
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach(App\Channel::all() as $channel)

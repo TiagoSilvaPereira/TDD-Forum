@@ -10,19 +10,40 @@
                 <div class="card-body">
                     <form action="{{ route('threads.store') }}" method="POST">
                         {{ csrf_field() }}
+
+                        <div class="form-group">
+                            <label for="title">Choose a Channel</label>
+                            <select name="channel_id" id="channel" class="form-control" required>
+                                <option value="">Choose One...</option>
+                                @foreach(App\Channel::all() as $channel)
+                                    <option value="{{ $channel->id }}" {{ old('channel_id') == $channel->id ? 'selected' : '' }} >
+                                        {{ $channel->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         
                         <div class="form-group">
-                            <label for="title"></label>
-                            <input type="text" id="title" name="title" class="form-control" placeholder="Title...">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title..." required>
                         </div>
 
                         <div class="form-group">
-                            <label for="body"></label>
-                            <textarea name="body" id="body" cols="30" rows="10" class="form-control" placeholder="Body..."></textarea>
+                            <label for="body">Body</label>
+                            <textarea name="body" id="body" cols="30" rows="10" class="form-control" placeholder="Body..." required>{{ old('body') }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Publish</button>
                     </form>
+
+                    @if(count($errors))
+                        <div class="mt-3">
+                            @foreach($errors->all() as $error)
+                                <div class="alert alert-danger">{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>
